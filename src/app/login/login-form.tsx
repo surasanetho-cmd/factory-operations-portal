@@ -1,35 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { useActionState } from "react";
+import { loginAction, type LoginState } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 
 export function LoginForm({ configError }: { configError: boolean }) {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-
-    if (error) {
-      toast.error("เข้าสู่ระบบไม่สำเร็จ: " + error.message);
-      return;
-    }
-
-    toast.success("เข้าสู่ระบบสำเร็จ");
-    router.push("/");
-    router.refresh();
-  }
+  const [state, formAction, pending] = useActionState<LoginState, FormData>(
+    loginAction,
+    {}
+  );
 
   return (
     <div className="card-glass w-full max-w-md">
@@ -43,30 +24,35 @@ export function LoginForm({ configError }: { configError: boolean }) {
           NEXT_PUBLIC_SUPABASE_ANON_KEY แล้ว Redeploy
         </p>
       )}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      {state.error && (
+        <p className="mb-4 rounded-md border border-[var(--color-danger)] bg-[rgba(224,92,74,0.1)] p-3 text-sm text-[var(--color-danger)]">
+          {state.error}
+        </p>
+      )}
+      <form action={formAction} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email">อีเมล</Label>
           <Input
             id="email"
+            name="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             placeholder="name@company.com"
             required
+            autoComplete="email"
           />
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">รหัสผ่าน</Label>
           <Input
             id="password"
+            name="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="current-password"
           />
         </div>
-        <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
+        <Button type="submit" className="w-full" disabled={pending}>
+          {pending ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
         </Button>
       </form>
     </div>
