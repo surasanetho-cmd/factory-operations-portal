@@ -1,0 +1,78 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.card-glass {
+  background: rgba(15, 31, 16, 0.72);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-success { background: rgba(61, 214, 92, 0.15); color: var(--color-success); }
+.badge-warning { background: rgba(245, 154, 63, 0.15); color: var(--color-warning); }
+.badge-danger { background: rgba(224, 92, 74, 0.15); color: var(--color-danger); }
+.badge-info { background: rgba(77, 159, 255, 0.15); color: var(--color-info); }
+.badge-neutral { background: var(--color-accent-subtle); color: var(--color-text-subtle); }
+
+.table-scroll-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.table-scroll-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-scroll-wrap th,
+.table-scroll-wrap td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table-scroll-wrap th {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: var(--color-bg-subtle);
+  border-right: 1px solid var(--color-border);
+}
+
+.page-header {
+  margin-bottom: var(--space-6);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.page-subtitle {
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}

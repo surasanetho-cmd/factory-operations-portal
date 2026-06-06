@@ -1,0 +1,5 @@
+/* FOP project overrides — keep dark-first factory defaults */
+:root {
+  --color-accent: #4d9fff;
+  --color-accent-subtle: rgba(77, 159, 255, 0.12);
+}
