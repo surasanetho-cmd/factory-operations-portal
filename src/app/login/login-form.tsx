@@ -6,7 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function LoginForm({ configError }: { configError: boolean }) {
+export function LoginForm({
+  configError,
+  authError,
+}: {
+  configError: boolean;
+  authError?: boolean;
+}) {
   const [state, formAction, pending] = useActionState<LoginState, FormData>(
     loginAction,
     {}
@@ -22,6 +28,11 @@ export function LoginForm({ configError }: { configError: boolean }) {
         <p className="mb-4 rounded-md border border-[var(--color-danger)] bg-[rgba(224,92,74,0.1)] p-3 text-sm text-[var(--color-danger)]">
           ยังไม่ได้ตั้งค่า Supabase บน Vercel — ใส่ NEXT_PUBLIC_SUPABASE_URL และ
           NEXT_PUBLIC_SUPABASE_ANON_KEY แล้ว Redeploy
+        </p>
+      )}
+      {authError && (
+        <p className="mb-4 rounded-md border border-[var(--color-danger)] bg-[rgba(224,92,74,0.1)] p-3 text-sm text-[var(--color-danger)]">
+          ลิงก์ยืนยัน/รีเซ็ตรหัสผ่านหมดอายุหรือไม่ถูกต้อง — ขอลิงก์ใหม่จาก Supabase
         </p>
       )}
       {state.error && (

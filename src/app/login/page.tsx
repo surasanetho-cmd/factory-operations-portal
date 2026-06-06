@@ -1,4 +1,5 @@
 import { LoginForm } from "./login-form";
+import { HashSessionHandler } from "@/components/auth/hash-session-handler";
 
 export default async function LoginPage({
   searchParams,
@@ -7,10 +8,14 @@ export default async function LoginPage({
 }) {
   const params = await searchParams;
   const configError = params.error === "config";
+  const authError = params.error === "auth";
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-bg p-4">
-      <LoginForm configError={configError} />
+      <div className="w-full max-w-md">
+        <HashSessionHandler />
+        <LoginForm configError={configError} authError={authError} />
+      </div>
     </div>
   );
 }

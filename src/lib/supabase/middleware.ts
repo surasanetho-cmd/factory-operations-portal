@@ -53,15 +53,18 @@ export async function updateSession(request: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser();
 
-    const isAuthRoute = request.nextUrl.pathname.startsWith("/login");
+    const isPublicRoute =
+      request.nextUrl.pathname.startsWith("/login") ||
+      request.nextUrl.pathname.startsWith("/auth") ||
+      request.nextUrl.pathname.startsWith("/reset-password");
 
-    if (!user && !isAuthRoute) {
+    if (!user && !isPublicRoute) {
       const url = request.nextUrl.clone();
       url.pathname = "/login";
       return NextResponse.redirect(url);
     }
 
-    if (user && isAuthRoute) {
+    if (user && request.nextUrl.pathname.startsWith("/login")) {
       const { data: profile } = await supabase
         .from("profiles")
         .select("role")

@@ -29,7 +29,10 @@ Web application for automotive parts factory operations — visibility, workflow
 4. **Authentication → Users** → สร้าง user + metadata `{ "role": "ADMIN", "name": "...", "employee_code": "..." }`
 5. **Authentication → URL Configuration** (หลัง deploy Vercel แล้ว):
    - **Site URL:** `https://your-app.vercel.app`
-   - **Redirect URLs:** `https://your-app.vercel.app/**`
+   - **Redirect URLs:**
+     - `https://your-app.vercel.app/**`
+     - `http://localhost:3000/**`
+   - สำหรับ reset password แนะนำ redirect ไป `/reset-password` หรือ `/login` (แอปรองรับ `#access_token` แล้ว)
 
 ### B. GitHub
 
