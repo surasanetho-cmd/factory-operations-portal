@@ -41,6 +41,12 @@ export async function loginAction(
           "อีเมลยังไม่ได้ยืนยัน — ใน Supabase Dashboard ให้ติ๊ก Auto Confirm หรือยืนยัน user ด้วยตนเอง",
       };
     }
+    if (error.message.toLowerCase().includes("fetch failed")) {
+      return {
+        error:
+          "เชื่อมต่อ Supabase ไม่ได้ — ตรวจ NEXT_PUBLIC_SUPABASE_URL บน Vercel ว่าเป็น https://mpjenispayfpsozcyird.supabase.co (สะกด mpjenispay ไม่ใช่ mpjeninspay) แล้ว Redeploy",
+      };
+    }
     return { error: "เข้าสู่ระบบไม่สำเร็จ: " + error.message };
   }
 

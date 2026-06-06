@@ -54,7 +54,7 @@ git push -u origin main
 
    | Name | Value |
    |------|--------|
-   | `NEXT_PUBLIC_SUPABASE_URL` | `https://YOUR_PROJECT.supabase.co` |
+   | `NEXT_PUBLIC_SUPABASE_URL` | `https://mpjenispayfpsozcyird.supabase.co` |
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | anon key จาก Supabase → Settings → API |
 
 3. **Deploy** → ได้ URL เช่น `https://factory-operations-portal.vercel.app`
