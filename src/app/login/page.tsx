@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,8 @@ import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const configError = searchParams.get("error") === "config";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,6 +40,12 @@ export default function LoginPage() {
           <h1 className="font-display text-2xl font-bold text-accent">FOP</h1>
           <p className="text-sm text-muted">Factory Operations Portal</p>
         </div>
+        {configError && (
+          <p className="mb-4 rounded-md border border-[var(--color-danger)] bg-[rgba(224,92,74,0.1)] p-3 text-sm text-[var(--color-danger)]">
+            ยังไม่ได้ตั้งค่า Supabase บน Vercel — ใส่ NEXT_PUBLIC_SUPABASE_URL และ
+            NEXT_PUBLIC_SUPABASE_ANON_KEY แล้ว Redeploy
+          </p>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">อีเมล</Label>
